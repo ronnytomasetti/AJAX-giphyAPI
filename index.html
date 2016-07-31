@@ -22,34 +22,38 @@
 
 <body>
 	
-	<div class="containter-fluid">
+	<div class="containter">
 	<div class="row">
 
 		<!-- Successful GIPHY API response data/images go here. -->
-		<div class="col-xs-10">
-			<div id="topic-data"></div>
+		<div class="col-xs-8 col-md-9">
+			<div id="giphy-data"></div>
 		</div>
 
-		<div class="col-xs-2">
+		<div class="col-xs-4 col-md-3">
 
-			<div id="add-topic-form">
+			<div id="buttons">
 
-				<div class="input-group">
-					<input type="text" class="form-control" placeholder="Add new topic...">
-					<span class="input-group-btn">
-						<button class="btn btn-primary" type="button">ADD</button>
-					</span>
-				</div> <!-- /.input-group -->
+				<div id="add-btn-form">
 
-			</div> <!-- /.add-topic -->
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="Add new topic...">
+						<span class="input-group-btn">
+							<button class="btn btn-primary" type="button">ADD</button>
+						</span>
+					</div> <!-- /.input-group -->
 
-			<!-- Button collection -->
-			<div id="btn-list"></div>
+				</div> <!-- /.add-topic -->
+
+				<!-- Button collection -->
+				<div id="btn-list"></div>
+
+			</div> <!-- /.buttons -->
 
 		</div>
 
 	</div> <!-- /.row -->
-	</div> <!--  /.container-fluid -->
+	</div> <!--  /.container -->
 
 	<!-- jQuery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

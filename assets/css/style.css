@@ -1,6 +1,26 @@
-@import 'https://fonts.googleapis.com/css?family=Roboto:300';
+#add-btn-form { margin: 20px auto; }
+#buttons {
+	margin-right: 50px;
+}
 
-body { font-family: 'Roboto', sans-serif; }
+.giphy-gif
+{
+	display: inline-block;
+	width: 250px;
+	padding: 10px;
+	margin: 20px 20px;
+}
 
-#add-topic-form { margin: 20px auto; }
+.giphy-rating
+{
+	font-weight: bold;
+}
 
+.gif-img:hover
+{
+	border: 2px solid #337AB7;
+}
+
+.panel-footer {
+	margin-top: 5px;
+}
