@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>AJAX</title>
+
+	<meta name="author" content="Ronny Tomasetti">
+	<meta name="description" content="UCF Bootcamp assignment containing ajax calls to GIPHY public API.">
+	<meta name="keywords" content="giphy">
+	<link rel="icon" href="assets/img/favicon.ico">
+
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+		integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<!-- Sites custom sylesheet -->
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+</head>
+
+<body>
+	
+	<div class="containter-fluid">
+	<div class="row">
+
+		<!-- Successful GIPHY API response data/images go here. -->
+		<div class="col-xs-10">
+			<div id="topic-data"></div>
+		</div>
+
+		<div class="col-xs-2">
+
+			<div id="add-topic-form">
+
+				<div class="input-group">
+					<input type="text" class="form-control" placeholder="Add new topic...">
+					<span class="input-group-btn">
+						<button class="btn btn-primary" type="button">ADD</button>
+					</span>
+				</div> <!-- /.input-group -->
+
+			</div> <!-- /.add-topic -->
+
+			<!-- Button collection -->
+			<div id="btn-list"></div>
+
+		</div>
+
+	</div> <!-- /.row -->
+	</div> <!--  /.container-fluid -->
+
+	<!-- jQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<!-- Bootstrap -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+			integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+			crossorigin="anonymous"></script>
+	<!-- JavaScript logic -->
+	<script src="assets/js/app.js"></script>
+
+</body>
+</html>
