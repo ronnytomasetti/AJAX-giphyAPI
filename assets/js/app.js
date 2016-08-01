@@ -5,21 +5,17 @@
  */
 
 var searchURL = "http://api.giphy.com/v1/gifs/search?";
-
-var topics = [ "cats", "dogs", "hamsters", "pig", "ducks", "fish",
-                "cats", "dogs", "hamsters", "pig", "duck", "fish",
-                "cats", "dogs", "hamsters", "pig", "duck", "fish",
-                "cats", "dogs", "hamsters", "pig", "duck", "fish" ];
+var topics = [ "cats", "dogs", "hamsters", "pigs", "ducks", "fish" ];
 
 $(document).ready(function() {
 
     // Create topic button collection and append
     $.each(topics, function(index, value)
     {
-        var btn = $('<button>').addClass('list-group-item')
-                               .attr('type', 'button')
-                               .attr('data-topic', value)
-                               .text(value);
+        var btn = $('<button>').addClass( 'list-group-item' )
+                               .attr( 'type', 'button' )
+                               .attr( 'data-topic', value )
+                               .text( value );
         
         $('#btn-list').append( btn );
     });
@@ -92,8 +88,17 @@ $(document).ready(function() {
         
     });
 
+    $('#add-topic-button').on( 'click', function() {
+        var userTopic = $('#add-topic-input').val().trim();
+        topics.push( userTopic );
+        renderButtons();
+    });
+
+    function renderButtons() {
+        $('#btn-list').empty
+    }
+
 });
 
-// TODO: ADD RATING TO EACH GIF
 // TODO: IMPLEMENT ADD TOPIC BUTTON LOGIC
 // TODO: STYLE CSS
