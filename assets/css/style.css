@@ -1,6 +1,12 @@
-#add-btn-form { margin: 20px auto; }
-#buttons {
-	margin-right: 50px;
+#add-btn-form
+{
+	margin: 25px auto;
+}
+
+.row
+{
+	margin-left: 0;
+	margin-right: 0;
 }
 
 .giphy-gif

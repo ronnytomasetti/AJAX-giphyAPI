@@ -4,34 +4,49 @@
  * 2016 UCF CODING BOOTCAMP
  */
 
-var searchURL = "http://api.giphy.com/v1/gifs/search?";
-var topics = [ "cats", "dogs", "hamsters", "pigs", "ducks", "fish" ];
+var initialTopics = [   "luke skywalker",
+                        "darth vader",
+                        "yoda",
+                        "c3po",
+                        "r2d2",
+                        "han solo",
+                        "chewbacca",
+                        "boba fett",
+                        "stormtroops",
+                        "death star" ];
+
+var initialBtnCount = 10;
+
+var giphySearchURL = "http://api.giphy.com/v1/gifs/search?";
+var swapiSearchURL = "http://swapi.co/api/people/";
 
 $(document).ready(function() {
 
-    // Create topic button collection and append
-    $.each(topics, function(index, value)
+    function generateButtonWith( topic )
     {
         var btn = $('<button>').addClass( 'list-group-item' )
                                .attr( 'type', 'button' )
-                               .attr( 'data-topic', value )
-                               .text( value );
+                               .attr( 'data-topic', topic )
+                               .text( topic )
+                               .on( 'click', function()
+                               {
+                                    // Update active button
+                                    $('.list-group-item').removeClass('active');
+                                    $( this ).addClass('active');
+
+                                    // Grab topic data from button clicked
+                                    var topic = $(this).data('topic');
+                                    // Make ajax call to GIPHY api
+                                    retrieveGiphyDataWith( topic );
+                                });
         
-        $('#btn-list').append( btn );
-    });
+        $('#btn-list').prepend( btn );
+    } // END generateButtonWith( topic )
 
-    // Add click event listener to buttons list
-    $('.list-group-item').on( 'click', function()
+    function retrieveGiphyDataWith( topic )
     {
-        // Update active button
-        $('.list-group-item').removeClass('active');
-        $( this ).addClass('active');
-
-        // Grab topic data from button clicked
-        var topic = $(this).data('topic');
-
         $.ajax({
-            url: searchURL,
+            url: giphySearchURL,
             type: 'GET',
             dataType: 'json',
             data: {
@@ -71,7 +86,7 @@ $(document).ready(function() {
                     var rating = "RATED " + value.rating.toUpperCase();
 
                 var gifRating = $('<div>').addClass('panel-footer gif-rating text-center')
-                                          .text( rating );
+                                          .html( '<strong>' + rating + '</strong>' );
 
                 var gifDiv = $('<div>').addClass('panel panel-default giphy-gif')
                                        .append( gifImg, gifRating );
@@ -85,20 +100,39 @@ $(document).ready(function() {
         .always(function() {
             console.log("complete");
         });
-        
+    } // END retrieveGiphyDataWith( topic )
+
+    function retrieveInitialTopics( initialBtnCount )
+    {
+        $.ajax({
+            url: swapiSearchURL,
+            type: 'GET',
+            dataType: 'json',
+        })
+        .done(function(response) {
+            console.log("DONE");
+        })
+        .fail(function() {
+            console.warn("AJAX ERROR");
+        })
+        .always(function() {
+            console.log("COMPLETE");
+        });
+    } // END retrieveInitialTopics( initialBtnCount )
+
+    $('#add-topic-button').on( 'click', function()
+    {
+        var userTopic = $('#add-topic-input').val().trim().toLowerCase();
+        generateButtonWith( userTopic );
+        $('#add-topic-input').val('');
     });
 
-    $('#add-topic-button').on( 'click', function() {
-        var userTopic = $('#add-topic-input').val().trim();
-        topics.push( userTopic );
-        renderButtons();
+    /********************************************************
+     * APPLICATION GO! Start generating initial button group.
+     ********************************************************/
+    $.each(initialTopics, function(index, value)
+    {
+        generateButtonWith( value );
     });
 
-    function renderButtons() {
-        $('#btn-list').empty
-    }
-
-});
-
-// TODO: IMPLEMENT ADD TOPIC BUTTON LOGIC
-// TODO: STYLE CSS
+}); // END $(document).ready()
