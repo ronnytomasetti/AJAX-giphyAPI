@@ -1,29 +1,24 @@
-#add-btn-form
-{
+#add-btn-form {
 	margin: 25px auto;
 }
 
-.row
-{
+.row {
 	margin-left: 0;
 	margin-right: 0;
 }
 
-.giphy-gif
-{
+.giphy-gif {
 	display: inline-block;
 	width: 250px;
 	padding: 10px;
 	margin: 20px 20px;
 }
 
-.giphy-rating
-{
+.giphy-rating {
 	font-weight: bold;
 }
 
-.gif-img:hover
-{
+.gif-img:hover {
 	border: 2px solid #337AB7;
 }
 

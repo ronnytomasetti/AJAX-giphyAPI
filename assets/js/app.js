@@ -22,28 +22,28 @@ var swapiSearchURL = "https://swapi.co/api/people/";
 
 $(document).ready(function() {
 
-    function generateButtonWith( topic )
+    function generateButtonWith(topic)
     {
-        var btn = $('<button>').addClass( 'list-group-item' )
-                               .attr( 'type', 'button' )
-                               .attr( 'data-topic', topic )
-                               .text( topic )
-                               .on( 'click', function()
+        var btn = $('<button>').addClass('list-group-item')
+                               .attr('type', 'button')
+                               .attr('data-topic', topic)
+                               .text(topic)
+                               .on('click', function()
                                {
                                     // Update active button
                                     $('.list-group-item').removeClass('active');
-                                    $( this ).addClass('active');
+                                    $(this).addClass('active');
 
                                     // Grab topic data from button clicked
                                     var topic = $(this).data('topic');
                                     // Make ajax call to GIPHY api
-                                    retrieveGiphyDataWith( topic );
+                                    retrieveGiphyDataWith(topic);
                                 });
-        
-        $('#btn-list').prepend( btn );
+
+        $('#btn-list').prepend(btn);
     } // END generateButtonWith( topic )
 
-    function retrieveGiphyDataWith( topic )
+    function retrieveGiphyDataWith(topic)
     {
         $.ajax({
             url: giphySearchURL,
@@ -55,75 +55,77 @@ $(document).ready(function() {
                 api_key: "dc6zaTOxFJmzC",
             },
         })
-        .done(function(response) {
-            $('#giphy-data').empty();
-            $.each(response.data, function (key, value)
+            .done(function(response)
             {
-                var gifImg = $('<img>').addClass('gif-img img-thumbnail')
-                                       .data( 'still-url', value.images.original_still.url )
-                                       .data( 'looping-url', value.images.original.url )
-                                       .data( 'state', 'still')
-                                       .attr( 'src', value.images.original_still.url )
-                                       .on( 'click', function()
-                                        {
-                                            if ( $(this).data('state') == 'still' )
-                                            {
-                                                $(this).attr( 'src', value.images.original.url );
-                                                $(this).data('state', 'looping');
-                                            }
-                                            else
-                                            {
-                                                $(this).attr( 'src', value.images.original_still.url );
-                                                $(this).data('state', 'still');
-                                            }
-                                        });
+                $('#giphy-data').empty();
 
-                // Check IF rating is empty string. If empty, create variable rating set to NOT RATED.
-                // ELSE create variable rating set to value.rating
-                if ( value.rating === "")
-                    var rating = "NOT RATED";
-                else
-                    var rating = "RATED " + value.rating.toUpperCase();
+                $.each(response.data, function(key, value)
+                {
+                    var gifImg = $('<img>').addClass('gif-img img-thumbnail')
+                                           .data('still-url', value.images.original_still.url)
+                                           .data('looping-url', value.images.original.url)
+                                           .data('state', 'still')
+                                           .attr('src', value.images.original_still.url)
+                                           .on('click', function()
+                                           {
+                                                if ($(this).data('state') == 'still')
+                                                {
+                                                    $(this).attr('src', value.images.original.url);
+                                                    $(this).data('state', 'looping');
+                                                }
+                                                else
+                                                {
+                                                    $(this).attr('src', value.images.original_still.url);
+                                                    $(this).data('state', 'still');
+                                                }
+                                            });
 
-                var gifRating = $('<div>').addClass('panel-footer gif-rating text-center')
-                                          .html( '<strong>' + rating + '</strong>' );
+                    // Check IF rating is empty string. If empty, create variable rating set to NOT RATED.
+                    // ELSE create variable rating set to value.rating
+                    if (value.rating === "")
+                        var rating = "NOT RATED";
+                    else
+                        var rating = "RATED " + value.rating.toUpperCase();
 
-                var gifDiv = $('<div>').addClass('panel panel-default giphy-gif')
-                                       .append( gifImg, gifRating );
+                    var gifRating = $('<div>').addClass('panel-footer gif-rating text-center')
+                                              .html('<strong>' + rating + '</strong>');
 
-                $('#giphy-data').append( gifDiv );
+                    var gifDiv = $('<div>').addClass('panel panel-default giphy-gif')
+                                           .append(gifImg, gifRating);
+
+                    $('#giphy-data').append(gifDiv);
+                })
             })
-        })
-        .fail(function() {
-            console.warn("AJAX ERROR");
-        })
-        .always(function() {
-            console.log("complete");
-        });
+            .fail(function() {
+                console.warn("AJAX ERROR");
+            })
+            .always(function() {
+                console.log("complete");
+            });
     } // END retrieveGiphyDataWith( topic )
 
-    function retrieveInitialTopics( initialBtnCount )
+    function retrieveInitialTopics(initialBtnCount)
     {
         $.ajax({
             url: swapiSearchURL,
             type: 'GET',
             dataType: 'json',
         })
-        .done(function(response) {
-            console.log("DONE");
-        })
-        .fail(function() {
-            console.warn("AJAX ERROR");
-        })
-        .always(function() {
-            console.log("COMPLETE");
-        });
+            .done(function(response) {
+                console.log("DONE");
+            })
+            .fail(function() {
+                console.warn("AJAX ERROR");
+            })
+            .always(function() {
+                console.log("COMPLETE");
+            });
     } // END retrieveInitialTopics( initialBtnCount )
 
-    $('#add-topic-button').on( 'click', function()
+    $('#add-topic-button').on('click', function()
     {
         var userTopic = $('#add-topic-input').val().trim().toLowerCase();
-        generateButtonWith( userTopic );
+        generateButtonWith(userTopic);
         $('#add-topic-input').val('');
     });
 
@@ -132,7 +134,7 @@ $(document).ready(function() {
      ********************************************************/
     $.each(initialTopics, function(index, value)
     {
-        generateButtonWith( value );
+        generateButtonWith(value);
     });
 
 }); // END $(document).ready()
