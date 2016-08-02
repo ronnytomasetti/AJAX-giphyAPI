@@ -17,8 +17,8 @@ var initialTopics = [   "luke skywalker",
 
 var initialBtnCount = 10;
 
-var giphySearchURL = "http://api.giphy.com/v1/gifs/search?";
-var swapiSearchURL = "http://swapi.co/api/people/";
+var giphySearchURL = "https://api.giphy.com/v1/gifs/search?";
+var swapiSearchURL = "https://swapi.co/api/people/";
 
 $(document).ready(function() {
 
