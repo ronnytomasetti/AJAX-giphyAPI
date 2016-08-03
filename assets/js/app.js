@@ -4,20 +4,22 @@
  * 2016 UCF CODING BOOTCAMP
  */
 
-var initialTopics = [   "luke skywalker",
-                        "darth vader",
-                        "yoda",
-                        "c3po",
-                        "r2d2",
-                        "han solo",
-                        "chewbacca",
-                        "boba fett",
-                        "stormtroops",
-                        "death star" ];
-
 var initialBtnCount = 10;
 
+var initialTopics = [   "Luke Skywalker",
+                        "Darth Vader",
+                        "Yoda",
+                        "C3PO",
+                        "R2D2",
+                        "Han Solo",
+                        "Chewbacca",
+                        "Boba Fett",
+                        "Stormtroops",
+                        "Obi Wan Kenobi" ];
+
 var giphySearchURL = "https://api.giphy.com/v1/gifs/search?";
+var giphyApiKey = "dc6zaTOxFJmzC";
+
 var swapiSearchURL = "https://swapi.co/api/people/";
 
 $(document).ready(function() {
@@ -26,7 +28,7 @@ $(document).ready(function() {
     {
         var btn = $('<button>').addClass('list-group-item')
                                .attr('type', 'button')
-                               .attr('data-topic', topic)
+                               .attr('data-topic', formatForSearch( topic ))
                                .text(topic)
                                .on('click', function()
                                {
@@ -35,9 +37,9 @@ $(document).ready(function() {
                                     $(this).addClass('active');
 
                                     // Grab topic data from button clicked
-                                    var topic = $(this).data('topic');
+                                    var searchTopic = $(this).data('topic');
                                     // Make ajax call to GIPHY api
-                                    retrieveGiphyDataWith(topic);
+                                    retrieveGiphyDataWith(searchTopic);
                                 });
 
         $('#btn-list').prepend(btn);
@@ -50,9 +52,9 @@ $(document).ready(function() {
             type: 'GET',
             dataType: 'json',
             data: {
-                q: topic,
+                q: topic + '+star+wars',
                 limit: 10,
-                api_key: "dc6zaTOxFJmzC",
+                api_key: giphyApiKey,
             },
         })
             .done(function(response)
@@ -128,6 +130,12 @@ $(document).ready(function() {
         generateButtonWith(userTopic);
         $('#add-topic-input').val('');
     });
+
+    function formatForSearch( topic )
+    {
+        var regEx = /\s/g;
+        return topic.replace(regEx, "+");
+    }
 
     /********************************************************
      * APPLICATION GO! Start generating initial button group.
